@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PrestamosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApyNom" Type="nchar" MaxLength="150" />
+          <Property Name="Domicilio" Type="nchar" MaxLength="350" />
+          <Property Name="DomicilioSec" Type="nchar" MaxLength="350" />
+          <Property Name="DNI" Type="nchar" MaxLength="20" />
+          <Property Name="Celular" Type="nchar" MaxLength="20" />
+          <Property Name="Fijo" Type="nchar" MaxLength="20" />
+          <Property Name="Email" Type="nchar" MaxLength="20" />
+          <Property Name="Cartera" Type="real" />
+          <Property Name="IdZona" Type="bigint" />
+          <Property Name="Status" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ingreso" Type="real" />
+          <Property Name="Egreso" Type="real" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdPrestamo" Type="bigint" />
+          <Property Name="Status" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="PresClienUsu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPrestamo" Type="bigint" />
+          <Property Name="IdUsuario" Type="bigint" />
+          <Property Name="IdCliente" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Prestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Monto" Type="real" />
+          <Property Name="Cuotas" Type="int" />
+          <Property Name="Interes" Type="real" />
+          <Property Name="SemQuinSem" Type="tinyint" />
+          <Property Name="IdCliente" Type="bigint" />
+          <Property Name="Status" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApyNom" Type="nchar" MaxLength="100" />
+          <Property Name="DNI" Type="nchar" MaxLength="20" />
+          <Property Name="Domicilio" Type="nchar" MaxLength="100" />
+          <Property Name="Celular" Type="nchar" MaxLength="20" />
+          <Property Name="Usuario" Type="nchar" MaxLength="20" />
+          <Property Name="Password" Type="nchar" MaxLength="20" />
+          <Property Name="IdZona" Type="bigint" />
+          <Property Name="Status" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK_Cliente_Zona">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimientos_Prestamos">
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="0..1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdPrestamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresClienUsu_Cliente1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="PresClienUsu" Type="Self.PresClienUsu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresClienUsu">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresClienUsu_Prestamos">
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="0..1" />
+          <End Role="PresClienUsu" Type="Self.PresClienUsu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresClienUsu">
+              <PropertyRef Name="IdPrestamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresClienUsu_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="PresClienUsu" Type="Self.PresClienUsu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresClienUsu">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prestamos_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prestamos">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Zona">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrestamosModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresClienUsu" EntityType="Self.PresClienUsu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cliente_Zona" Association="Self.FK_Cliente_Zona">
+            <End Role="Zona" EntitySet="Zona" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Prestamos" Association="Self.FK_Movimientos_Prestamos">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresClienUsu_Cliente1" Association="Self.FK_PresClienUsu_Cliente1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="PresClienUsu" EntitySet="PresClienUsu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresClienUsu_Prestamos" Association="Self.FK_PresClienUsu_Prestamos">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="PresClienUsu" EntitySet="PresClienUsu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresClienUsu_Usuario" Association="Self.FK_PresClienUsu_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="PresClienUsu" EntitySet="PresClienUsu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prestamos_Cliente" Association="Self.FK_Prestamos_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Prestamos" EntitySet="Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Zona" Association="Self.FK_Usuario_Zona">
+            <End Role="Zona" EntitySet="Zona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PrestamosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApyNom" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Domicilio" Type="String" MaxLength="350" FixedLength="true" Unicode="true" />
+          <Property Name="DomicilioSec" Type="String" MaxLength="350" FixedLength="true" Unicode="true" />
+          <Property Name="DNI" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Fijo" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Cartera" Type="Single" />
+          <Property Name="IdZona" Type="Int64" />
+          <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="Zona" Relationship="Self.FK_Cliente_Zona" FromRole="Cliente" ToRole="Zona" />
+          <NavigationProperty Name="PresClienUsus" Relationship="Self.FK_PresClienUsu_Cliente1" FromRole="Cliente" ToRole="PresClienUsu" />
+          <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_Cliente" FromRole="Cliente" ToRole="Prestamos" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ingreso" Type="Single" />
+          <Property Name="Egreso" Type="Single" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdPrestamo" Type="Int64" />
+          <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="Prestamo" Relationship="Self.FK_Movimientos_Prestamos" FromRole="Movimientos" ToRole="Prestamos" />
+        </EntityType>
+        <EntityType Name="PresClienUsu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPrestamo" Type="Int64" />
+          <Property Name="IdUsuario" Type="Int64" />
+          <Property Name="IdCliente" Type="Int64" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_PresClienUsu_Cliente1" FromRole="PresClienUsu" ToRole="Cliente" />
+          <NavigationProperty Name="Prestamo" Relationship="Self.FK_PresClienUsu_Prestamos" FromRole="PresClienUsu" ToRole="Prestamos" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_PresClienUsu_Usuario" FromRole="PresClienUsu" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Prestamo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Monto" Type="Single" />
+          <Property Name="Cuotas" Type="Int32" />
+          <Property Name="Interes" Type="Single" />
+          <Property Name="SemQuinSem" Type="Byte" />
+          <Property Name="IdCliente" Type="Int64" />
+          <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Prestamos_Cliente" FromRole="Prestamos" ToRole="Cliente" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK_Movimientos_Prestamos" FromRole="Prestamos" ToRole="Movimientos" />
+          <NavigationProperty Name="PresClienUsus" Relationship="Self.FK_PresClienUsu_Prestamos" FromRole="Prestamos" ToRole="PresClienUsu" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApyNom" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="DNI" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Domicilio" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Usuario1" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="IdZona" Type="Int64" />
+          <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="PresClienUsus" Relationship="Self.FK_PresClienUsu_Usuario" FromRole="Usuario" ToRole="PresClienUsu" />
+          <NavigationProperty Name="Zona" Relationship="Self.FK_Usuario_Zona" FromRole="Usuario" ToRole="Zona" />
+        </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_Cliente_Zona" FromRole="Zona" ToRole="Cliente" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Zona" FromRole="Zona" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Cliente_Zona">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresClienUsu_Cliente1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="PresClienUsu" Type="Self.PresClienUsu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresClienUsu">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prestamos_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prestamos">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimientos_Prestamos">
+          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="0..1" />
+          <End Role="Movimientos" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdPrestamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresClienUsu_Prestamos">
+          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="0..1" />
+          <End Role="PresClienUsu" Type="Self.PresClienUsu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresClienUsu">
+              <PropertyRef Name="IdPrestamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresClienUsu_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="PresClienUsu" Type="Self.PresClienUsu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresClienUsu">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Zona">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrestamosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimiento" />
+          <EntitySet Name="PresClienUsus" EntityType="Self.PresClienUsu" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamo" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <EntitySet Name="Zonas" EntityType="Self.Zona" />
+          <AssociationSet Name="FK_Cliente_Zona" Association="Self.FK_Cliente_Zona">
+            <End Role="Zona" EntitySet="Zonas" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresClienUsu_Cliente1" Association="Self.FK_PresClienUsu_Cliente1">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="PresClienUsu" EntitySet="PresClienUsus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prestamos_Cliente" Association="Self.FK_Prestamos_Cliente">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Prestamos" EntitySet="Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Prestamos" Association="Self.FK_Movimientos_Prestamos">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresClienUsu_Prestamos" Association="Self.FK_PresClienUsu_Prestamos">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="PresClienUsu" EntitySet="PresClienUsus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresClienUsu_Usuario" Association="Self.FK_PresClienUsu_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="PresClienUsu" EntitySet="PresClienUsus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Zona" Association="Self.FK_Usuario_Zona">
+            <End Role="Zona" EntitySet="Zonas" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PrestamosModelStoreContainer" CdmEntityContainer="PrestamosEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="PrestamosModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApyNom" ColumnName="ApyNom" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="DomicilioSec" ColumnName="DomicilioSec" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Fijo" ColumnName="Fijo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cartera" ColumnName="Cartera" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos">
+            <EntityTypeMapping TypeName="PrestamosModel.Movimiento">
+              <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ingreso" ColumnName="Ingreso" />
+                <ScalarProperty Name="Egreso" ColumnName="Egreso" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresClienUsus">
+            <EntityTypeMapping TypeName="PrestamosModel.PresClienUsu">
+              <MappingFragment StoreEntitySet="PresClienUsu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prestamos">
+            <EntityTypeMapping TypeName="PrestamosModel.Prestamo">
+              <MappingFragment StoreEntitySet="Prestamos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Interes" ColumnName="Interes" />
+                <ScalarProperty Name="SemQuinSem" ColumnName="SemQuinSem" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="PrestamosModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApyNom" ColumnName="ApyNom" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zonas">
+            <EntityTypeMapping TypeName="PrestamosModel.Zona">
+              <MappingFragment StoreEntitySet="Zona">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
