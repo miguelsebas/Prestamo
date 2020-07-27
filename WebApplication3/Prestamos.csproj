@@ -213,10 +213,46 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\vendor\css\rtl\appwork.css" />
+    <Content Include="Content\vendor\css\rtl\bootstrap.css" />
+    <Content Include="Content\vendor\css\rtl\colors.css" />
+    <Content Include="Content\vendor\css\rtl\demo.css" />
+    <Content Include="Content\vendor\css\rtl\theme-corporate.css" />
+    <Content Include="Content\vendor\css\rtl\uikit.css" />
+    <Content Include="Content\vendor\fonts\fontawesome.css" />
+    <Content Include="Content\vendor\fonts\ionicons.css" />
+    <Content Include="Content\vendor\fonts\linearicons.css" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.svg" />
+    <Content Include="Content\vendor\fonts\open-iconic.css" />
+    <Content Include="Content\vendor\fonts\pe-icon-7-stroke.css" />
+    <Content Include="Content\vendor\js\bootstrap.js" />
+    <Content Include="Content\vendor\js\dashboards_dashboard-1.js" />
+    <Content Include="Content\vendor\js\demo.js" />
+    <Content Include="Content\vendor\js\jquery.min.js" />
+    <Content Include="Content\vendor\js\layout-helpers.js" />
+    <Content Include="Content\vendor\js\material-ripple.js" />
+    <Content Include="Content\vendor\js\pace.js" />
+    <Content Include="Content\vendor\js\polyfills.js" />
+    <Content Include="Content\vendor\js\sidenav.js" />
+    <Content Include="Content\vendor\js\theme-settings.js" />
+    <Content Include="Content\vendor\libs\chartjs\chartjs.js" />
+    <Content Include="Content\vendor\libs\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="Content\vendor\libs\perfect-scrollbar\perfect-scrollbar.js" />
+    <Content Include="Content\vendor\libs\popper\popper.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\avatars\1.png" />
+    <Content Include="img\avatars\10-small.png" />
+    <Content Include="img\avatars\11-small.png" />
+    <Content Include="img\avatars\12-small.png" />
+    <Content Include="img\avatars\4-small.png" />
+    <Content Include="img\avatars\5-small.png" />
+    <Content Include="img\avatars\6-small.png" />
+    <Content Include="img\avatars\7-small.png" />
+    <Content Include="img\avatars\8-small.png" />
+    <Content Include="img\avatars\9-small.png" />
     <Content Include="Models\PrestamosModelo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PrestamosModelo.edmx</DependentUpon>
@@ -239,6 +275,11 @@
     <Content Include="Models\PrestamosModelo.edmx.diagram">
       <DependentUpon>PrestamosModelo.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\vendor\fonts\ionicons\ionicons.woff" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.eot" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.ttf" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.woff" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
