@@ -31,5 +31,6 @@ namespace WebApplication3.Models
         public virtual DbSet<Prestamo> Prestamos { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Zona> Zonas { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

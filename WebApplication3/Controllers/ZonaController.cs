@@ -13,8 +13,16 @@ namespace WebApplication3.Controllers
         // GET: Zona
         public ActionResult Index()
         {
-            var list = _servicioZona.traerTodasZona();
-            return View(list);
+            var list = _servicioZona.traerTodasZona();                        
+            
+            if (list.Count() != 0)
+            {
+                return View(list);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // GET: Zona/Details/5
@@ -32,7 +40,7 @@ namespace WebApplication3.Controllers
 
         // POST: Zona/Create
         [HttpPost]
-        public ActionResult Create(ViewModels.ZonaVM zonaVM)
+        public ActionResult Create(Models.Zona zonaVM)
         {
             try
             {
@@ -54,7 +62,7 @@ namespace WebApplication3.Controllers
 
         // POST: Zona/Edit/5
         [HttpPost]
-        public ActionResult Edit(ViewModels.ZonaVM zonaVM)
+        public ActionResult Edit(Models.Zona zonaVM)
         {
             try
             {
@@ -76,7 +84,7 @@ namespace WebApplication3.Controllers
 
         // POST: Zona/Delete/5
         [HttpPost]
-        public ActionResult Delete(ViewModels.ZonaVM zonaVM)
+        public ActionResult Delete(Models.Zona zonaVM)
         {
             try
             {

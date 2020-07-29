@@ -11,7 +11,8 @@ namespace WebApplication3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,19 @@ namespace WebApplication3.Models
         }
     
         public long Id { get; set; }
+        [Display(Name ="Nombre y Apellido")]
         public string ApyNom { get; set; }
         public string DNI { get; set; }
         public string Domicilio { get; set; }
+        [Display(Name = "Telefono Celular")]
         public string Celular { get; set; }
+        [Display(Name = "Usuario")]
+        [Required]
         public string Usuario1 { get; set; }
+        [Required]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
+        [Display(Name = "Zona")]
         public Nullable<long> IdZona { get; set; }
         public Nullable<byte> Status { get; set; }
     

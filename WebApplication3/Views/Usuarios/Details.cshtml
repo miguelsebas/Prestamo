@@ -1,10 +1,11 @@
-﻿@model WebApplication3.ViewModels.Usuario
+﻿@model WebApplication3.Models.Usuario
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Datelles</h2>
 
 <div>
     <h4>Usuario</h4>
@@ -43,11 +44,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Usuario1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.User)
+            @Html.DisplayFor(model => model.Usuario1)
         </dd>
 
         <dt>
@@ -59,16 +60,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdZona)
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdZona)
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zona.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zona.Descripcion)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista de Usuarios", "Index")
 </p>

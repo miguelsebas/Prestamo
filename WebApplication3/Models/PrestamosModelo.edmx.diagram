@@ -18,6 +18,7 @@
         <AssociationConnector Association="PrestamosModel.FK_PresClienUsu_Prestamos" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_PresClienUsu_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_Usuario_Zona" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PrestamosModel.sysdiagram" Width="1.5" PointX="7.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

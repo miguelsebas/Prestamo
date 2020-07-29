@@ -1,18 +1,21 @@
-﻿@model WebApplication3.ViewModels.ClienteVM
+﻿@model WebApplication3.Models.Cliente
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
+<h2>Editar Cliente</h2>
+@{
+    var listadoZona = ViewBag.ListaZona;
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ClienteVM</h4>
+        <h4>Cliente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -58,10 +61,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TelefonoFijo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Fijo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TelefonoFijo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TelefonoFijo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Fijo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fijo, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,31 +85,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdPrestamo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdZona, "IdZona", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdPrestamo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdPrestamo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdZona, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdZona, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("IdZona", listadoZona as SelectList, new { @class = "form-data" })
                 @Html.ValidationMessageFor(model => model.IdZona, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Editar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a la Lista de Clientes", "Index")
 </div>
 
 @section Scripts {

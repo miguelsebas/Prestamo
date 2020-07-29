@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using WebApplication3.Models;
 
 namespace WebApplication3.Servicios
 {
@@ -10,7 +10,7 @@ namespace WebApplication3.Servicios
     {
         Models.PrestamosEntities db = new Models.PrestamosEntities();
 
-        public void InsertarCliente(ViewModels.ClienteVM clienteVM)
+        public void InsertarCliente(Models.Cliente clienteVM)
         {
             var newCliente = new Models.Cliente();
             newCliente.ApyNom = clienteVM.ApyNom;
@@ -19,8 +19,8 @@ namespace WebApplication3.Servicios
             newCliente.Domicilio = clienteVM.Domicilio;
             newCliente.DomicilioSec = clienteVM.DomicilioSec;
             newCliente.Email = clienteVM.Email;
-            newCliente.Fijo = clienteVM.TelefonoFijo;
-            newCliente.Cartera = (float)clienteVM.Cartera;
+            newCliente.Fijo = clienteVM.Fijo;
+            newCliente.Cartera = clienteVM.Cartera;
             newCliente.IdZona = clienteVM.IdZona;
             newCliente.Status = 1;
 
@@ -28,7 +28,7 @@ namespace WebApplication3.Servicios
             db.SaveChanges();
         }
 
-        public void EditarCliente(ViewModels.ClienteVM clienteVM)
+        public void EditarCliente(Models.Cliente clienteVM)
         {
             var EditarCliente = db.Clientes.Find(clienteVM.Id);
             EditarCliente.ApyNom = clienteVM.ApyNom;
@@ -37,7 +37,7 @@ namespace WebApplication3.Servicios
             EditarCliente.Domicilio = clienteVM.Domicilio;
             EditarCliente.DomicilioSec = clienteVM.DomicilioSec;
             EditarCliente.Email = clienteVM.Email;
-            EditarCliente.Fijo = clienteVM.TelefonoFijo;
+            EditarCliente.Fijo = clienteVM.Fijo;
             EditarCliente.Cartera = (float)clienteVM.Cartera;
             EditarCliente.IdZona = clienteVM.IdZona;
 
@@ -52,26 +52,26 @@ namespace WebApplication3.Servicios
 
             db.Entry(BorrarCliente).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-        }
+        }        
 
-        public IEnumerable<object> traerTodosClientes()
+        public IEnumerable<Models.Cliente> traerTodosClientes()
         {
             var list = db.Clientes.Where(x => x.Status == 1);
             return list.ToList();
         }
-        public object traerPorId(long id)
+        public Cliente traerPorId(long id)
         {
-            var clienteVM = db.Clientes.Find(id);
-            return clienteVM;
+            Cliente oCliente = db.Clientes.Where(x => x.Id == id && x.Status == 1).FirstOrDefault();
+            return oCliente;
         }
-        public object traerPorNombreYApellido(string cadena)
+        public Models.Cliente traerPorNombreYApellido(string cadena)
         {
             var clienteVM = db.Clientes.Where(x => x.ApyNom == cadena || x.ApyNom.Contains(cadena)
-            ||x.DNI == cadena || x.Email == cadena && x.Status == 1);
+            ||x.DNI == cadena || x.Email == cadena && x.Status == 1).FirstOrDefault();
             return clienteVM;
         }
 
-        public IEnumerable<object> traerPorClientesPorZona(long idZona)
+        public IEnumerable<Models.Cliente> traerPorClientesPorZona(long idZona)
         {
             var clienteVM = db.Clientes.Where(x => x.IdZona == idZona && x.Status == 1);
             return clienteVM.ToList();

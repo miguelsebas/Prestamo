@@ -1,13 +1,14 @@
-﻿@model IEnumerable<WebApplication3.ViewModels.ClienteVM>
+﻿@model IEnumerable<WebApplication3.Models.Cliente>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista de Clientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Cliente", "Create")
 </p>
 <table class="table">
     <tr>
@@ -27,7 +28,7 @@
             @Html.DisplayNameFor(model => model.Celular)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TelefonoFijo)
+            @Html.DisplayNameFor(model => model.Fijo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -36,52 +37,53 @@
             @Html.DisplayNameFor(model => model.Cartera)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdPrestamo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdZona)
+            @Html.DisplayNameFor(model => model.Zona.Descripcion)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApyNom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Domicilio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DomicilioSec)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DNI)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Celular)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TelefonoFijo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cartera)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdPrestamo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdZona)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApyNom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Domicilio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DomicilioSec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DNI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Celular)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fijo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cartera)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zona.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
 
 </table>

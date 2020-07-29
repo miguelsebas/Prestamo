@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication3.Models;
 
 namespace WebApplication3.Servicios
 {
@@ -9,7 +10,7 @@ namespace WebApplication3.Servicios
     {
         Models.PrestamosEntities db = new Models.PrestamosEntities();
 
-        public void InsertarUsuario(ViewModels.Usuario userVM)
+        public void InsertarUsuario(Models.Usuario userVM)
         {
             var newUser = new Models.Usuario()
             {
@@ -18,7 +19,7 @@ namespace WebApplication3.Servicios
                 Celular = userVM.Celular,
                 Domicilio = userVM.Domicilio,
                 IdZona = userVM.IdZona,
-                Usuario1 = userVM.User,
+                Usuario1 = userVM.Usuario1,
                 Password = userVM.Password,
                 Status = 1
             };
@@ -26,14 +27,14 @@ namespace WebApplication3.Servicios
             db.SaveChanges();
         }
 
-        public void EditarUsuario(ViewModels.Usuario userVM)
+        public void EditarUsuario(Models.Usuario userVM)
         {
             var EditUser = db.Usuarios.Find(userVM.Id);
             EditUser.ApyNom = userVM.ApyNom;
             EditUser.Celular = userVM.Celular;
             EditUser.DNI = userVM.DNI;
             EditUser.Domicilio = userVM.Domicilio;
-            EditUser.Usuario1 = userVM.User;
+            EditUser.Usuario1 = userVM.Usuario1;
             EditUser.Password = userVM.Password;
             EditUser.IdZona = userVM.IdZona;
 
@@ -50,24 +51,24 @@ namespace WebApplication3.Servicios
             db.SaveChanges();
         }
 
-        public IEnumerable<object> traerTodosUsuarios()
+        public IEnumerable<Usuario> traerTodosUsuarios()
         {
             var list = db.Usuarios.Where(x => x.Status == 1);
             return list.ToList();
         }
-        public object traerPorId(long id)
+        public Usuario traerPorId(long id)
         {
-            var clienteVM = db.Usuarios.Find(id);
-            return clienteVM;
+            var user = db.Usuarios.Find(id);
+            return user;
         }
-        public object traerPorNombreYApellido(string cadena)
+        public Usuario traerPorNombreYApellido(string cadena)
         {
             var clienteVM = db.Usuarios.Where(x => x.ApyNom == cadena || x.ApyNom.Contains(cadena)
-            || x.DNI == cadena && x.Status == 1);
+            || x.DNI == cadena && x.Status == 1).FirstOrDefault();
             return clienteVM;
         }
 
-        public IEnumerable<object> traerPorUsuariosPorZona(long idZona)
+        public IEnumerable<Usuario> traerPorUsuariosPorZona(long idZona)
         {
             var clienteVM = db.Usuarios.Where(x => x.IdZona == idZona && x.Status == 1);
             return clienteVM.ToList();

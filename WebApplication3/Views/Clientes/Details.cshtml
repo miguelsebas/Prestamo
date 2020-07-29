@@ -1,13 +1,14 @@
-﻿@model WebApplication3.ViewModels.ClienteVM
+﻿@model WebApplication3.Models.Cliente
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>ClienteVM</h4>
+    <h4>Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -51,11 +52,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TelefonoFijo)
+            @Html.DisplayNameFor(model => model.Fijo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TelefonoFijo)
+            @Html.DisplayFor(model => model.Fijo)
         </dd>
 
         <dt>
@@ -72,27 +73,19 @@
 
         <dd>
             @Html.DisplayFor(model => model.Cartera)
-        </dd>
+        </dd>        
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdPrestamo)
+            @Html.DisplayNameFor(model => model.Zona.Descripcion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdPrestamo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdZona)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdZona)
+            @Html.DisplayFor(model => model.Zona.Descripcion)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>

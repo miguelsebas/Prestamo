@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication3.Models;
 
 namespace WebApplication3.Servicios
 {
@@ -9,7 +10,7 @@ namespace WebApplication3.Servicios
     {
         Models.PrestamosEntities db = new Models.PrestamosEntities();
 
-        public void InsertarZona(ViewModels.ZonaVM zonaVM)
+        public void InsertarZona(Models.Zona zonaVM)
         {
             var newZona = new Models.Zona()
             {
@@ -20,7 +21,7 @@ namespace WebApplication3.Servicios
             db.SaveChanges();
         }
 
-        public void EditarZona(ViewModels.ZonaVM zonaVM)
+        public void EditarZona(Models.Zona zonaVM)
         {
             var editarZona = db.Zonas.Find(zonaVM.Id);
             editarZona.Descripcion = zonaVM.Descripcion;
@@ -38,19 +39,19 @@ namespace WebApplication3.Servicios
             db.SaveChanges();
         }
 
-        public IEnumerable<object> traerTodasZona()
+        public IEnumerable<Models.Zona> traerTodasZona()
         {
             var list = db.Zonas.Where(x => x.Status == 1);
             return list.ToList();
         }
-        public object traerPorId(long id)
+        public Zona traerPorId(long id)
         {
             var zoneVM = db.Zonas.Find(id);
             return zoneVM;
         }
-        public object traerPorDescripcion(string cadena)
+        public Zona traerPorDescripcion(string cadena)
         {
-            var zoneVM = db.Zonas.Where(x => x.Descripcion == cadena || x.Descripcion.Contains(cadena) && x.Status == 1);
+            var zoneVM = db.Zonas.Where(x => x.Descripcion == cadena || x.Descripcion.Contains(cadena) && x.Status == 1).FirstOrDefault();
             return zoneVM;
         }
 

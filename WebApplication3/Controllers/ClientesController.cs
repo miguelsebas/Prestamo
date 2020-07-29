@@ -9,11 +9,20 @@ namespace WebApplication3.Controllers
     public class ClientesController : Controller
     {
         Servicios.ServiciosClientes _serviciosClientes = new Servicios.ServiciosClientes();
+        Servicios.ServicioZona _serviciosZona = new Servicios.ServicioZona();
         // GET: Clientes
         public ActionResult Index()
         {
             var list = _serviciosClientes.traerTodosClientes();
-            return View(list);
+            if (list.Count() != 0)
+            {
+                return View(list);
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         // GET: Clientes/Details/5
@@ -26,34 +35,40 @@ namespace WebApplication3.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
+            var list = _serviciosZona.traerTodasZona();            
+            ViewBag.ListaZona = new SelectList(list,"Id", "Descripcion");
             return View();
         }
 
         // POST: Clientes/Create
         [HttpPost]
-        public ActionResult Create(ViewModels.ClienteVM clienteVM)
+        public ActionResult Create(Models.Cliente clienteVM)
         {
             try
             {
+                var list = _serviciosZona.traerTodasZona();
+                ViewBag.ListaZona = new SelectList(list, "Id", "Descripcion");
                 _serviciosClientes.InsertarCliente(clienteVM);
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(ex);
             }
         }
 
         // GET: Clientes/Edit/5
         public ActionResult Edit(long id)
         {
+            var list = _serviciosZona.traerTodasZona();
+            ViewBag.ListaZona = new SelectList(list, "Id", "Descripcion");
             var editCliente = _serviciosClientes.traerPorId(id);
             return View(editCliente);
         }
 
         // POST: Clientes/Edit/5
         [HttpPost]
-        public ActionResult Edit(ViewModels.ClienteVM clienteVM)
+        public ActionResult Edit(Models.Cliente clienteVM)
         {
             try
             {
@@ -75,7 +90,7 @@ namespace WebApplication3.Controllers
 
         // POST: Clientes/Delete/5
         [HttpPost]
-        public ActionResult Delete(ViewModels.ClienteVM clienteVM)
+        public ActionResult Delete(Models.Cliente clienteVM)
         {
             try
             {

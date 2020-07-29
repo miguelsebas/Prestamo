@@ -1,13 +1,14 @@
-﻿@model WebApplication3.ViewModels.ZonaVM
+﻿@model WebApplication3.Models.Zona
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>ZonaVM</h4>
+    <h4>Zona</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,10 +18,9 @@
         <dd>
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la Lista", "Index")
 </p>
