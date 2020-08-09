@@ -4,21 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="354c1c6db4a74d2fa592d4a27f0892b2" Name="Diagram1">
-        <EntityTypeShape EntityType="PrestamosModel.Cliente" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PrestamosModel.Movimiento" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PrestamosModel.PresClienUsu" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PrestamosModel.Prestamo" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="PrestamosModel.Usuario" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="PrestamosModel.Zona" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+      <Diagram DiagramId="3cb1676eb9c0481a9f2ecd317214d721" Name="Diagram1">
+        <EntityTypeShape EntityType="PrestamosModel.Cliente" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.Cuota" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.Movimiento" Width="1.5" PointX="10.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.PresClienUsu" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.Prestamo" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.TipoCuota" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.TipoIntere" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.Usuario" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrestamosModel.Zona" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <AssociationConnector Association="PrestamosModel.FK_Cliente_Zona" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_PresClienUsu_Cliente1" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_Prestamos_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="PrestamosModel.FK_Cuotas_Prestamos" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_Movimientos_Prestamos" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_PresClienUsu_Prestamos" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_PresClienUsu_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="PrestamosModel.FK_Prestamos_TipoCuota" ManuallyRouted="false" />
+        <AssociationConnector Association="PrestamosModel.FK_Prestamos_TipoInteres" ManuallyRouted="false" />
+        <AssociationConnector Association="PrestamosModel.FK_Prestamos_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="PrestamosModel.FK_Usuario_Zona" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PrestamosModel.sysdiagram" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PrestamosModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

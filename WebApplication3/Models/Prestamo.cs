@@ -17,6 +17,7 @@ namespace WebApplication3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Prestamo()
         {
+            this.Cuotas1 = new HashSet<Cuota>();
             this.Movimientos = new HashSet<Movimiento>();
             this.PresClienUsus = new HashSet<PresClienUsu>();
         }
@@ -26,14 +27,21 @@ namespace WebApplication3.Models
         public Nullable<float> Monto { get; set; }
         public Nullable<int> Cuotas { get; set; }
         public Nullable<float> Interes { get; set; }
-        public Nullable<byte> SemQuinSem { get; set; }
+        public Nullable<long> IdTipoInteres { get; set; }
         public Nullable<long> IdCliente { get; set; }
         public Nullable<byte> Status { get; set; }
+        public Nullable<long> IdTipoCuota { get; set; }
+        public Nullable<long> IdUsuario { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cuota> Cuotas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimiento> Movimientos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PresClienUsu> PresClienUsus { get; set; }
+        public virtual TipoCuota TipoCuota { get; set; }
+        public virtual TipoIntere TipoIntere { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

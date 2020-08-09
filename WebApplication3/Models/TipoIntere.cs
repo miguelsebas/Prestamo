@@ -12,29 +12,18 @@ namespace WebApplication3.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class TipoIntere
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public TipoIntere()
         {
-            this.PresClienUsus = new HashSet<PresClienUsu>();
             this.Prestamos = new HashSet<Prestamo>();
         }
     
         public long Id { get; set; }
-        public string ApyNom { get; set; }
-        public string DNI { get; set; }
-        public string Domicilio { get; set; }
-        public string Celular { get; set; }
-        public string Usuario1 { get; set; }
-        public string Password { get; set; }
-        public Nullable<long> IdZona { get; set; }
-        public Nullable<byte> Status { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PresClienUsu> PresClienUsus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prestamo> Prestamos { get; set; }
-        public virtual Zona Zona { get; set; }
     }
 }

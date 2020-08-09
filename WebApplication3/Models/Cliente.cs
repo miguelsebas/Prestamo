@@ -11,8 +11,7 @@ namespace WebApplication3.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,21 +22,14 @@ namespace WebApplication3.Models
         }
     
         public long Id { get; set; }
-        [Display(Name ="Nombre y Apellido")]
         public string ApyNom { get; set; }
         public string Domicilio { get; set; }
-        [Display(Name = "Domicilio Secundario")]
         public string DomicilioSec { get; set; }
         public string DNI { get; set; }
-        [Display(Name = "Telefono Celular")]
         public string Celular { get; set; }
-        [Display(Name = "Telefono Fijo")]
         public string Fijo { get; set; }
-        [Display(Name = "Direccion de Email")]
-        [EmailAddress]
         public string Email { get; set; }
         public Nullable<float> Cartera { get; set; }
-        [Display(Name = "Zona")]
         public Nullable<long> IdZona { get; set; }
         public Nullable<byte> Status { get; set; }
     

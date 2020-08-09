@@ -8,6 +8,9 @@ namespace WebApplication3.Controllers
 {
     public class PrestamosController : Controller
     {
+        Servicios.ServiciosClientes _serviciosClientes = new Servicios.ServiciosClientes();
+        Servicios.ServicioTipoInteres _servicioTipoInteres = new Servicios.ServicioTipoInteres();
+        Servicios.ServiciosPrestamo _serviciosPrestamo = new Servicios.ServiciosPrestamo();
         // GET: Prestamos
         public ActionResult Index()
         {
@@ -84,6 +87,25 @@ namespace WebApplication3.Controllers
             {
                 return View();
             }
+        }
+        [HttpGet]
+        public ActionResult CrearPrestamoConCliente(long id)
+        {
+            var cliente = _serviciosClientes.traerPorId(id);
+            ViewBag.IdZona = cliente.IdZona;
+            var listaInteres = _servicioTipoInteres.traerInteres(); 
+            var listaCuotas = _servicioTipoInteres.traerCuotas();
+            ViewBag.TipoInteres = new SelectList(listaInteres, "Id", "Descripcion");
+            ViewBag.TipoCuotas = new SelectList(listaCuotas, "Id", "Descripcion");
+            ViewBag.ClienteId = cliente.Id;
+            ViewBag.Cliente = cliente.ApyNom;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CrearPrestamoConCliente(Models.Prestamo prestamo)
+        {
+            _serviciosPrestamo.InsertarPrestamos(prestamo);
+            return RedirectToAction("Index");
         }
     }
 }

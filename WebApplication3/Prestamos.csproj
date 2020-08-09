@@ -166,6 +166,9 @@
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>PrestamosModelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cuota.cs">
+      <DependentUpon>PrestamosModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Movimiento.cs">
       <DependentUpon>PrestamosModelo.tt</DependentUpon>
     </Compile>
@@ -193,6 +196,12 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>PrestamosModelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoCuota.cs">
+      <DependentUpon>PrestamosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoIntere.cs">
+      <DependentUpon>PrestamosModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>PrestamosModelo.tt</DependentUpon>
     </Compile>
@@ -200,9 +209,11 @@
       <DependentUpon>PrestamosModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\ServicioLogin.cs" />
     <Compile Include="Servicios\ServiciosClientes.cs" />
     <Compile Include="Servicios\ServiciosPrestamo.cs" />
     <Compile Include="Servicios\ServiciosUsuarios.cs" />
+    <Compile Include="Servicios\ServicioTipoInteres.cs" />
     <Compile Include="Servicios\ServicioZona.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +276,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\vendor\fonts\ionicons\ionicons.woff" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.eot" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.ttf" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.woff" />
+    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.woff2" />
     <EntityDeploy Include="Models\PrestamosModelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PrestamosModelo.Designer.cs</LastGenOutput>
@@ -272,11 +288,6 @@
     <Content Include="Models\PrestamosModelo.edmx.diagram">
       <DependentUpon>PrestamosModelo.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\vendor\fonts\ionicons\ionicons.woff" />
-    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.eot" />
-    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.ttf" />
-    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.woff" />
-    <Content Include="Content\vendor\fonts\linearicons\Linearicons-Free.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -288,7 +299,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -317,10 +330,10 @@
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Prestamos\CrearPrestamoConCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Prestamos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

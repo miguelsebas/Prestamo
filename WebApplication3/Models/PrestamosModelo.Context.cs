@@ -26,9 +26,12 @@ namespace WebApplication3.Models
         }
     
         public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Cuota> Cuotas { get; set; }
         public virtual DbSet<Movimiento> Movimientos { get; set; }
         public virtual DbSet<PresClienUsu> PresClienUsus { get; set; }
         public virtual DbSet<Prestamo> Prestamos { get; set; }
+        public virtual DbSet<TipoCuota> TipoCuotas { get; set; }
+        public virtual DbSet<TipoIntere> TipoInteres { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Zona> Zonas { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
